@@ -99,7 +99,7 @@ T get(int index) {
 ```
 Si desea información más detallada sobre este proceso, puede encontrarla en el siguiente [enlace a miro](https://miro.com/app/board/uXjVMYC93wc=/?moveToWidget=3458764580148903856&cot=14).
 
-Cómo puede imaginar, estás listas tienen operaciones para agregar elementos ([add]()), eliminar ([remove]()) y reiniciar la lista ([clear]()). Su tarea es completar estos tres métodos. Solo hay que hacerlo en la estructura LinkedList.h. 
+Cómo puede imaginar, estás listas tienen operaciones para agregar elementos ([add](https://github.com/clase-programacion-avanzada/CPP-Workshop-Bonus/blob/main/libs/LinkedList.h#L38)), eliminar ([remove](https://github.com/clase-programacion-avanzada/CPP-Workshop-Bonus/blob/main/libs/LinkedList.h#L47)) y reiniciar la lista ([clear](https://github.com/clase-programacion-avanzada/CPP-Workshop-Bonus/blob/main/libs/LinkedList.h#L137)). Su tarea es completar estos tres métodos. Solo hay que hacerlo en la estructura LinkedList.h.
 
 Si usted ejecuta el código del archivo Taller7.cpp este mostrará si el código implementado funciona o no. 
 
