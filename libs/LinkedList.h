@@ -39,45 +39,16 @@ struct LinkedList {
 
         Node<T>* newNode = new Node<T>(value);
 
-        if (head == nullptr) {
-            head = newNode;
-        } else {
-            Node<T>* currentNode = head;
+        
 
-            while (currentNode->next != nullptr) {
-                currentNode = currentNode->next;
-            }
-
-            currentNode->next = newNode;
-            newNode->previous = currentNode;
-        }
-
-        size++;
+        
     }
 
     bool remove(int index) {
         
         Node <T>* searchNode = getNode(index);
        
-        if (searchNode == nullptr) {
-            return false;
-        }
-
-        Node <T>* previousNode = searchNode->previous;
-        Node <T>* nextNode = searchNode->next;
-
-        bool isFirstNode = previousNode == nullptr;
         
-        if (isFirstNode) {
-            head = nextNode;
-        } else {
-            previousNode->next = nextNode;
-            nextNode->previous = previousNode;
-        }
-
-        delete searchNode;
-
-        size--;
        
         return true;
     }
@@ -85,9 +56,11 @@ struct LinkedList {
     T get(int index) {
         
         Node<T>* searchNode = getNode(index);
+
         if (searchNode == nullptr) {
             return NULL;
         }
+        
         return searchNode->value;
         
     }
@@ -99,9 +72,11 @@ struct LinkedList {
         }
 
         Node<T>* currentNode = head;
-
-        for (int i = 0; i < index; i++) {
+        int currentIndex = 0;
+        
+        while (currentIndex < index) {
             currentNode = currentNode->next;
+            currentIndex++;
         }
 
         return currentNode;
@@ -110,6 +85,10 @@ struct LinkedList {
     Node<T>* getLastNode() {
         
         Node<T>* currentNode = head;
+
+        if (currentNode == nullptr) {
+            return nullptr;
+        }
 
         while (currentNode->next != nullptr) {
             currentNode = currentNode->next;
@@ -159,14 +138,9 @@ struct LinkedList {
 
         Node<T>* currentNode = head;
 
-        while (currentNode != nullptr) {
-            Node<T>* nextNode = currentNode->next;
-            delete currentNode;
-            currentNode = nextNode;
-        }
+        
 
-        head = nullptr;
-        size = 0;
+        size = -1;
         
     }
 

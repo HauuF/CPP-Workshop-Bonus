@@ -25,11 +25,18 @@ int main() {
 }
 
 void printList(List<int> list) {
-    cout << list.toString() << endl;
+    for (int i = 0; i < list.size; i++) {
+        cout << list.get(i) << " ";
+    }
 }
 
 void printLinkedList(LinkedList<int> list) {
-    cout << list.toString() << endl;
+    Node<int>* currentNode = list.head;
+    while (currentNode != nullptr) {
+        cout << currentNode->value << " ";
+        currentNode = currentNode->next;
+    }
+    cout << endl;
 }
 
 List<int> createList() {
@@ -50,6 +57,15 @@ LinkedList<int> createLinkedList() {
 
 bool listsAreEqual(List<int> list, LinkedList<int> linkedList) {
     Node<int>* currentNode = linkedList.head;
+
+    if (currentNode == nullptr) {
+        return list.size == 0;
+    }
+
+    if (list.size != linkedList.size) {
+        return false;
+    }
+
     for (int i = 0; i < list.size; i++) {
         if (currentNode->value != list.get(i)) {
             return false;
@@ -72,13 +88,14 @@ void testAddLinkedList() {
     Node<int>* currentNode = list.head;
     int i = 0;
 
-    bool firstNodePreviousIsNull = currentNode->previous == nullptr;
+    bool firstNodePreviousIsNull = currentNode != nullptr && currentNode->previous == nullptr;
     
     if(!firstNodePreviousIsNull) {
         cout << "Test failed. First node previous should be null" << endl;
     }
 
-    bool lastNodeNextIsNull = list.getLastNode()->next == nullptr;
+    Node<int>* lastNode = list.getLastNode();
+    bool lastNodeNextIsNull = lastNode != nullptr && lastNode->next == nullptr;
 
     if(!lastNodeNextIsNull) {
         cout << "Test failed. Last node next should be null" << endl;
@@ -159,11 +176,11 @@ void testRemoveLinkedListWithNoneElementsShouldReturnFalse() {
         cout << "Test failed. Expected false" << endl;
     }
     
-    if (list.size != 0) {
+    else if (list.size != 0) {
         cout << "Test failed. Expected size should be 0 but was "  << list.size << endl;
     }
 
-    if (list.head != nullptr) {
+    else if (list.head != nullptr) {
         
         cout << "Test failed. Expected head should be nullptr" << endl;
     } else {
@@ -189,18 +206,12 @@ void testRemoveLinkedListFirstElementShouldReturnTrue() {
 
     if(result != expectedResult) {
         cout << "Test failed. Expected result should be false" << endl;
-    } 
-    
-    if (list.size != 0) {
+    } else if (list.size != 0) {
         cout << "Test failed. Expected size should be 0 but was "  << list.size << endl;
-    }
-
-    if (list.head != nullptr) {
+    } else if (list.head != nullptr) {
         
         cout << "Test failed. Expected head should be nullptr" << endl;
-    }
-
-    else {
+    } else {
         cout << "LinkedList remove method test passed" << endl;
     }
 
@@ -223,14 +234,10 @@ void testClearIsDeletingAllElements() {
 
     if (list.size != 0) {
         cout << "Test failed. Expected size should be 0 but was "  << list.size << endl;
-    }
-
-    if (list.head != nullptr) {
+    } else if (list.head != nullptr) {
         
         cout << "Test failed. Expected head should be nullptr" << endl;
-    }
-
-    else {
+    } else {
         cout << "LinkedList clear method test passed" << endl;
     }
 
