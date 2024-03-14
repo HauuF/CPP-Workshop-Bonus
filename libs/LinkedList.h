@@ -38,20 +38,36 @@ struct LinkedList {
     void add(T& value) {
 
         Node<T>* newNode = new Node<T>(value);
-
-        
-
-        
+        if (head == nullptr) {
+        head = newNode;
+        } else {
+        Node<T>* lastNode = getLastNode();
+        lastNode->next = newNode;
+        newNode->previous = lastNode;
+    }
+    size++;
     }
 
     bool remove(int index) {
         
         Node <T>* searchNode = getNode(index);
-       
-        
-       
-        return true;
+
+    if (searchNode == nullptr) {
+    return false;
     }
+    if (searchNode->previous == nullptr) {
+        head = searchNode->next;
+    } else {
+        searchNode->previous->next = searchNode->next;
+    }
+    if (searchNode->next != nullptr) {
+        searchNode->next->previous = searchNode->previous;
+    }
+    delete searchNode;
+    size--;
+
+    return true;
+}
 
     T get(int index) {
         
@@ -137,11 +153,13 @@ struct LinkedList {
     void clear() {
 
         Node<T>* currentNode = head;
-
-        
-
-        size = -1;
-        
+        while (currentNode != nullptr) {
+        Node<T>* nextNode = currentNode->next;
+        delete currentNode;
+        currentNode = nextNode;
+        }
+        head = nullptr;
+        size = 0;
     }
 
     LinkedList<T> copy() {
