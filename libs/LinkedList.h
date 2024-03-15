@@ -63,7 +63,7 @@ struct LinkedList {
     if (searchNode->next != nullptr) {
         searchNode->next->previous = searchNode->previous;
     }
-    delete searchNode;
+    delete[] searchNode;
     size--;
 
     return true;
